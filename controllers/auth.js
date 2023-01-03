@@ -5,11 +5,6 @@ const jwt = require('jsonwebtoken');
 
 exports.signUp = (req, res) => {
         // check if the email is already use
-        Monster.findOne({ email: req.body.email }).then((monster) => {
-          if(monster) {
-            return res.status(200).json({AlreadyUse:true});
-          } 
-
           bcrypt
           .hash(req.body.password, 10)
           .then((hash) => {
@@ -19,11 +14,9 @@ exports.signUp = (req, res) => {
                 });
                 monster_one
                   .save()
-                  .then((user) => res.status(201).json())
+                  .then((user) => res.status(201).json(user))
                   .catch(error => res.status(500).json({  error }));
               });
-      })
-
 };
 
 exports.signIn = (req, res) => {
@@ -52,7 +45,7 @@ exports.signIn = (req, res) => {
 }
 
 exports.verifyEmail = (req, res) => {
-  User.findOne({ email: req.params.email }).then((user) => {
-      res.status(200).json(user);
+  Monster.findOne({ email: req.params.email }).then((monster) => {
+      res.status(200).json(monster);
   })
 }

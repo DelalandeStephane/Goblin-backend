@@ -4,7 +4,7 @@ const authCtrl = require("../controllers/auth");
 
  router.post("/sign-up", authCtrl.signUp);
  router.post('/sign-in', authCtrl.signIn);
- router.post("/verify-email", authCtrl.verifyEmail);
+ router.get("/verify-email/:email", authCtrl.verifyEmail);
 
 
 module.exports = router;
